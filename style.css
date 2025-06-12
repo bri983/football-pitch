@@ -4,21 +4,21 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 30px 20px; /* Consistent padding around the content */
+    padding: 30px 20px;
     margin: 0;
     color: #333;
     min-height: 100vh;
-    box-sizing: border-box; /* Crucial: padding and border are included in element's total width/height */
-    overflow-x: hidden; /* Prevents horizontal scroll from accidental overflows */
+    box-sizing: border-box;
+    overflow-x: hidden; 
 }
 
 .main-wrapper {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    width: 100%; /* Take full available width */
-    max-width: 1200px; /* Maximum width for the entire layout */
-    align-items: center; /* Center items horizontally within the wrapper */
+    width: 100%; 
+    max-width: 1200px; 
+    align-items: center; 
 }
 
 .container {
@@ -27,9 +27,9 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 100%; /* Take full width of its parent */
-    max-width: 600px; /* Limit its own max width */
-    box-sizing: border-box; /* Apply box-sizing here too */
+    width: 100%; 
+    max-width: 600px;
+    box-sizing: border-box; 
 }
 
 h1 {
@@ -48,13 +48,11 @@ h2 {
     width: 100%;
     text-align: center;
 }
-
-/* Pitch Container Styles */
 .pitch-container {
     position: relative;
-    width: 100%; /* Take full width of its parent (main-wrapper) */
-    max-width: 900px; /* Maximum width of the pitch image */
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio (height / width * 100). Adjust if your image aspect ratio is different. */
+    width: 100%; 
+    max-width: 900px; 
+    padding-bottom: 56.25%; 
     height: 0;
     background-color: #28a745;
     border-radius: 15px;
@@ -121,19 +119,14 @@ h2 {
 .lb img, .rb img, .lcb img, .rcb img { border-color: #64b5f6; }
 .ldm img, .rdm img, .lcm img, .rcm img, .lam img, .ram img { border-color: #ff9800; }
 .lw img, .rw img, .ls img, .rs img { border-color: #f44336; }
-
-
-/* Controls Container */
 .controls-container {
     display: flex;
-    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    flex-wrap: wrap; 
     gap: 30px;
-    width: 100%; /* Take full width of its parent */
-    max-width: 900px; /* Match pitch max-width for better visual flow */
-    justify-content: center; /* Center controls if they don't fill the width */
+    width: 100%; 
+    max-width: 900px; 
+    justify-content: center; 
 }
-
-/* Styles for Add Players (option) and Coach Select (coachSelect) */
 .option,
 .coachSelect {
     background-color: #fff;
@@ -144,11 +137,8 @@ h2 {
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    /* Removed min-width here. Let flex-basis and flex-wrap handle sizing. */
-    flex: 1 1 400px; /* flex-grow, flex-shrink, flex-basis.
-                       flex-basis 400px suggests a preferred width before growing/shrinking.
-                       This is more flexible than min-width. */
-    max-width: 450px; /* Still useful to prevent them from becoming too wide individually */
+    flex: 1 1 400px; 
+    max-width: 450px; 
     box-sizing: border-box;
 }
 
@@ -211,25 +201,19 @@ h2 {
     box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
 }
 
-
-/* Media Queries for better control */
-
-/* Adjust max-widths for larger tablets/laptops */
 @media (max-width: 992px) {
     .main-wrapper {
         gap: 25px;
     }
     .pitch-container,
     .controls-container {
-        max-width: 650px; /* Slightly narrower for this breakpoint */
+        max-width: 650px;
     }
     .option,
     .coachSelect {
-        flex-basis: 300px; /* Adjust preferred width slightly for tablets */
+        flex-basis: 300px; 
     }
 }
-
-/* Tablets and smaller laptops, where controls should ideally stack */
 @media (max-width: 768px) {
     body {
         padding: 20px 10px;
@@ -251,9 +235,9 @@ h2 {
     }
 
     .pitch-container {
-        padding-bottom: 60%; /* May need slight adjustment for certain image aspect ratios on mobile */
+        padding-bottom: 60%; 
         border-radius: 10px;
-        max-width: 100%; /* Ensure it takes full width */
+        max-width: 100%; 
     }
 
     .player-on-pitch img {
@@ -266,20 +250,20 @@ h2 {
     }
 
     .controls-container {
-        flex-direction: column; /* Force controls to stack vertically */
+        flex-direction: column; 
         gap: 20px;
-        max-width: 500px; /* Constrain stacked controls for readability */
+        max-width: 500px;
     }
 
     .option,
     .coachSelect {
         padding: 20px;
-        flex: 1 1 100%; /* Stack fully: flex-basis to 100% of parent */
-        max-width: 100%; /* Ensure it takes full width */
+        flex: 1 1 100%; 
+        max-width: 100%; 
     }
 
     .add-player-button {
-        max-width: 100%; /* Full width button in stacked layout */
+        max-width: 100%; 
     }
 
     .coachSelect img {
@@ -302,4 +286,23 @@ h2 {
         padding: 10px;
         font-size: 0.9em;
     }
+}
+.goal-post {
+    position: absolute;
+    background-color: white; 
+    width: 60%; 
+    height: 1.5%;
+    left: 50%;
+    transform: translateX(-50%); 
+    z-index: 2; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
+}
+
+.top-goal {
+    top: 5%; 
+}
+
+.bottom-goal {
+    bottom: 5%;
 }
