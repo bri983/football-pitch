@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Lineup Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="container">
+            <h1>Football Lineup Builder</h1>
+        </div>
+
+        <div class="controls-container">
+            <div class="option">
+                <h2>Add Player</h2>
+                <input class="player-name-input" type="text" id="namer" placeholder="Player Name">
+                <select class="player-position-select" id="browers">
+                    <option value="GK">Goalkeeper (GK)</option>
+                    <option value="LB">Left Back (LB)</option>
+                    <option value="RB">Right Back (RB)</option>
+                    <option value="LCB">Left Center Back (LCB)</option>
+                    <option value="RCB">Right Center Back (RCB)</option>
+                    <option value="LDM">Left Defensive Mid (LDM)</option>
+                    <option value="RDM">Right Defensive Mid (RDM)</option>
+                    <option value="LCM">Left Central Mid (LCM)</option>
+                    <option value="RCM">Right Central Mid (RCM)</option>
+                    <option value="LAM">Left Attacking Mid (LAM)</option>
+                    <option value="RAM">Right Attacking Mid (RAM)</option>
+                    <option value="LW">Left Winger (LW)</option>
+                    <option value="RW">Right Winger (RW)</option>
+                    <option value="LS">Left Striker (LS)</option>
+                    <option value="RS">Right Striker (RS)</option>
+                </select>
+                <button class="add-player-button" onclick="addPlayerToPitch()">Add to Lineup</button>
+            </div>
+
+            <div class="coachSelect">
+                <h2>Select Coach</h2>
+                <img src="Antonio Conte.jpg" alt="Coach Image" id="coachImg">
+                <select name="coach-selection" id="coach">
+                    <option value="Antonio Conte.jpg">Antonio Conte</option>
+                    <option value="José Mourinho.webp">Jose Mourinho</option>
+                    <option value="Jürgen Klopp.jpg">Jurgen Klopp</option>
+                    <option value="pep.jpeg">Pep Guardiola</option>
+                    <option value="Zinedine Zidane.webp">Zinedine Zidane</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="pitch-container">
+            <img class="football-pitch-image" src="Football_field.svg.png" alt="Football Pitch">
+            <div class="players-on-pitch" id="playersOnPitch">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        class Player {
+            constructor(pos, name) {
+                this.position = pos;
+                this.name = name;
+            }
+        }
+
+        const playersOnPitchDiv = document.getElementById('playersOnPitch');
+        const namerInput = document.getElementById('namer');
+        const browersSelect = document.getElementById('browers');
+        const coachImg = document.getElementById('coachImg');
+        const coachSelect = document.getElementById('coach');
+        const playerPositions = {
+            "GK": { top: '88%', left: '50%' }, 
+            "LB": { top: '70%', left: '10%' },
+            "RB": { top: '70%', left: '90%' }, 
+            "LCB": { top: '75%', left: '40%' },
+            "RCB": { top: '75%', left: '60%' }, 
+            "LDM": { top: '55%', left: '30%' },
+            "RDM": { top: '55%', left: '70%' }, 
+            "LCM": { top: '45%', left: '35%' }, 
+            "RCM": { top: '45%', left: '65%' }, 
+            "LAM": { top: '30%', left: '40%' },
+            "RAM": { top: '30%', left: '60%' }, 
+            "LW": { top: '25%', left: '10%' },
+            "RW": { top: '25%', left: '90%' }, 
+            "LS": { top: '12%', left: '40%' }, 
+            "RS": { top: '12%', left: '60%' }, 
+        };
+        const addedPlayers = {};
+
+        const addPlayerToPitch = () => {
+            const playerName = namerInput.value.trim();
+            const playerPositionKey = browersSelect.value;
+            if (!playerName) {
+                alert("Please enter player's name.");
+                return;
+            }
+            const positionCoords = playerPositions[playerPositionKey];
+            if (!positionCoords) {
+                alert(`Position ${playerPositionKey} is not defined on the pitch or is unavailable.`);
+                return;
+            }
+            if (addedPlayers[playerPositionKey]) {
+                alert(`A player is already assigned to the ${playerPositionKey} position.`);
+                return;
+            }
+            const playerDiv = document.createElement('div');
+            playerDiv.classList.add('player-on-pitch');
+            playerDiv.classList.add(playerPositionKey.toLowerCase());
+            playerDiv.style.top = positionCoords.top;
+            playerDiv.style.left = positionCoords.left;
+            playerDiv.style.transform = 'translate(-50%, -50%)';
+            playerDiv.innerHTML = `
+                <img src="./Basic.jpg" alt="Player Image">
+                <p>${playerName}</p>
+            `;
+            playersOnPitchDiv.appendChild(playerDiv);
+            addedPlayers[playerPositionKey] = {
+                name: playerName,
+                element: playerDiv
+            };
+            namerInput.value = '';
+        };
+        coachSelect.addEventListener("change", () => {
+            coachImg.src = coachSelect.value;
+        });
+        coachImg.src = coachSelect.value;
+    </script>
+</body>
+
+</html>

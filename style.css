@@ -1,0 +1,305 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e9ecef;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px 20px; /* Consistent padding around the content */
+    margin: 0;
+    color: #333;
+    min-height: 100vh;
+    box-sizing: border-box; /* Crucial: padding and border are included in element's total width/height */
+    overflow-x: hidden; /* Prevents horizontal scroll from accidental overflows */
+}
+
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%; /* Take full available width */
+    max-width: 1200px; /* Maximum width for the entire layout */
+    align-items: center; /* Center items horizontally within the wrapper */
+}
+
+.container {
+    background-color: #fff;
+    padding: 25px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%; /* Take full width of its parent */
+    max-width: 600px; /* Limit its own max width */
+    box-sizing: border-box; /* Apply box-sizing here too */
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 0;
+    font-size: 2.5em;
+}
+
+h2 {
+    color: #34495e;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Pitch Container Styles */
+.pitch-container {
+    position: relative;
+    width: 100%; /* Take full width of its parent (main-wrapper) */
+    max-width: 900px; /* Maximum width of the pitch image */
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio (height / width * 100). Adjust if your image aspect ratio is different. */
+    height: 0;
+    background-color: #28a745;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+}
+
+.football-pitch-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+}
+
+.players-on-pitch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.player-on-pitch {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    font-size: 0.85em;
+}
+
+.player-on-pitch img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 5px;
+    transition: transform 0.2s ease-out;
+}
+
+.player-on-pitch:hover img {
+    transform: scale(1.1);
+}
+
+.player-on-pitch p {
+    margin: 0;
+    white-space: nowrap;
+    font-size: 1em;
+}
+
+.gk img { border-color: #ffeb3b; }
+.lb img, .rb img, .lcb img, .rcb img { border-color: #64b5f6; }
+.ldm img, .rdm img, .lcm img, .rcm img, .lam img, .ram img { border-color: #ff9800; }
+.lw img, .rw img, .ls img, .rs img { border-color: #f44336; }
+
+
+/* Controls Container */
+.controls-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    gap: 30px;
+    width: 100%; /* Take full width of its parent */
+    max-width: 900px; /* Match pitch max-width for better visual flow */
+    justify-content: center; /* Center controls if they don't fill the width */
+}
+
+/* Styles for Add Players (option) and Coach Select (coachSelect) */
+.option,
+.coachSelect {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    /* Removed min-width here. Let flex-basis and flex-wrap handle sizing. */
+    flex: 1 1 400px; /* flex-grow, flex-shrink, flex-basis.
+                       flex-basis 400px suggests a preferred width before growing/shrinking.
+                       This is more flexible than min-width. */
+    max-width: 450px; /* Still useful to prevent them from becoming too wide individually */
+    box-sizing: border-box;
+}
+
+/* Form Elements within Controls */
+.option input[type="text"],
+.option select,
+.coachSelect select {
+    width: 100%; /* Fill parent container */
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #555;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Crucial for inputs/selects */
+}
+
+.option input[type="text"]::placeholder {
+    color: #aaa;
+}
+
+.option input[type="text"]:focus,
+.option select:focus,
+.coachSelect select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+    outline: none;
+}
+
+.add-player-button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+    width: 100%; /* Fill parent container */
+    max-width: 250px; /* Limit button width for better appearance */
+    box-sizing: border-box;
+}
+
+.add-player-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.add-player-button:active {
+    transform: translateY(0);
+}
+
+.coachSelect img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #007bff;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+
+/* Media Queries for better control */
+
+/* Adjust max-widths for larger tablets/laptops */
+@media (max-width: 992px) {
+    .main-wrapper {
+        gap: 25px;
+    }
+    .pitch-container,
+    .controls-container {
+        max-width: 650px; /* Slightly narrower for this breakpoint */
+    }
+    .option,
+    .coachSelect {
+        flex-basis: 300px; /* Adjust preferred width slightly for tablets */
+    }
+}
+
+/* Tablets and smaller laptops, where controls should ideally stack */
+@media (max-width: 768px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    .main-wrapper {
+        gap: 20px;
+    }
+
+    .container {
+        padding: 20px 25px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.4em;
+    }
+
+    .pitch-container {
+        padding-bottom: 60%; /* May need slight adjustment for certain image aspect ratios on mobile */
+        border-radius: 10px;
+        max-width: 100%; /* Ensure it takes full width */
+    }
+
+    .player-on-pitch img {
+        width: 35px;
+        height: 35px;
+        border-width: 2px;
+    }
+    .player-on-pitch p {
+        font-size: 0.9em;
+    }
+
+    .controls-container {
+        flex-direction: column; /* Force controls to stack vertically */
+        gap: 20px;
+        max-width: 500px; /* Constrain stacked controls for readability */
+    }
+
+    .option,
+    .coachSelect {
+        padding: 20px;
+        flex: 1 1 100%; /* Stack fully: flex-basis to 100% of parent */
+        max-width: 100%; /* Ensure it takes full width */
+    }
+
+    .add-player-button {
+        max-width: 100%; /* Full width button in stacked layout */
+    }
+
+    .coachSelect img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    h2 {
+        font-size: 1.2em;
+    }
+    .option input[type="text"],
+    .option select,
+    .coachSelect select {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+}
